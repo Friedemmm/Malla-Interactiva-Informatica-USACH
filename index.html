@@ -1,3 +1,96 @@
-<link rel="stylesheet" href="css/styles.css">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malla Interactiva Informática USACH</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    
+    <!-- Elementos de fondo animados -->
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
 
-<script src="js/script.js"></script>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">Universidad de Santiago<br>de Chile</div>
+            <ul class="nav-links">
+                <li><button class="nav-button active" data-carrera="ejecucion">Ingeniería de Ejecución<br>en Computación e Informática</button></li>
+                <li><button class="nav-button" data-carrera="civil">Ingeniería Civil<br>en Informática</button></li>
+                <li><button class="nav-button disabled" data-carrera="prosecucion">Prosecución en<br>Ingeniería Civil en Informática</button></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 id="carrera-title">Ingeniería de Ejecución en Computación e Informática</h1>
+    </section>
+    
+    <!-- Curriculum Section -->
+    <section class="curriculum-section" id="programa">
+        <h2 class="section-title">Malla Curricular</h2>
+        
+        <button class="reset-button" onclick="resetProgress()">🔄 Reiniciar Progreso</button>
+        <div class="toggle-container" id="convalidacionContainer" style="display: none;">
+            <div class="toggle-switch" id="convalidacionToggle">
+                <div class="toggle-labels">
+                    <span class="toggle-label-left">NORMAL</span>
+                    <span class="toggle-label-right">CONVALIDAR</span>
+                </div>
+                <div class="toggle-slider">
+                    <div class="toggle-slider-content">
+                        <span class="toggle-icon">📋</span>
+                        <span>NORMAL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="curriculum-grid" id="mallaContainer">
+            <!-- El contenido se generará dinámicamente -->
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stats-grid" id="statsContainer">
+                <!-- Las estadísticas se generarán dinámicamente -->
+            </div>
+            
+            <!-- Advertencia de requisitos solo para prosecución -->
+            <div id="advertenciaRequisitos" style="margin-top: 30px; text-align: center; display: none;">
+                <p style="color: var(--text-light); opacity: 0.8; font-size: 0.9rem;">
+                    ⚠️<strong>REQUISITOS PARA CONVALIDACIÓN</strong>: Título de Ingeniero de Ejecución en Computación e Informática (USACH) o asignaturas cursadas en el DIINF USACH⚠️
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-signature">
+                <div class="footer-avatar">F</div>
+                <div>
+                    <div class="footer-username">@Friedemmm</div>
+                </div>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/Friedemmm" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/sofía-vergara-godoy/" target="_blank">LinkedIn</a>
+            </div>
+            <br>
+        </div>
+        <div class="footer-description">
+            Malla interactiva correspondiente a las carreras del<br>Departamento de Informática de la Universidad de Santiago de Chile (USACH).
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
