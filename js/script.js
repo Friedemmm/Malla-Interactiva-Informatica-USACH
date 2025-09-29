@@ -27,7 +27,7 @@ function generateStats(carrera) {
     const añosRestantes = semestresRestantes / 2;
     const añosRestantesTexto = añosRestantes % 1 === 0 
         ? `${añosRestantes}` 
-        : `${Math.floor(añosRestantes)}.5`;
+        : `${Math.floor(añosRestantes)}½`;
             
     return `
     <div class="stat-item">
@@ -312,4 +312,5 @@ convalidacionToggle.addEventListener('click', () => {
 
 // Inicializar
 renderMalla('ejecucion');
+
 initializeProgress();
