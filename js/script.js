@@ -119,6 +119,7 @@ function handleRamoClick(ramo) {
     
     renderMalla(carreraActual);
 }
+
 function semestreTieneRamosDisponibles(semestre) {
     return semestre.ramos.some(ramo => 
         puedeTomarRamo(ramo) && !ramosAprobados.has(ramo.nombre) && !ramosConvalidados.has(ramo.nombre)
@@ -135,13 +136,17 @@ function marcarTodoSemestre(semestre) {
 }
 
 function desmarcarTodoSemestre(semestre) {
+    const convalidacionToggle = document.getElementById('convalidacionToggle');
+    const modoConvalidacionActivo = convalidacionToggle && convalidacionToggle.classList.contains('active');
+    
     const ramosDelSemestre = semestre.ramos.map(ramo => ramo.nombre);
     ramosDelSemestre.forEach(nombre => {
         if (ramosAprobados.has(nombre)) {
             ramosAprobados.delete(nombre);
             desaprobarRamosCascada(nombre);
         }
-        if (ramosConvalidados.has(nombre)) {
+        // Solo eliminar convalidados si NO estamos en modo convalidación activo
+        if (ramosConvalidados.has(nombre) && !modoConvalidacionActivo) {
             ramosConvalidados.delete(nombre);
             desaprobarRamosCascada(nombre);
         }
@@ -200,6 +205,14 @@ function renderMalla(carrera) {
             const estado = getEstadoRamo(ramo);
                     
             ramoItem.className = `subject-item ${estado}`;
+            
+            // Si es convalidado y el modo convalidación está activo, marcar como no clickeable
+            const convalidacionToggle = document.getElementById('convalidacionToggle');
+            const modoConvalidacionActivo = convalidacionToggle && convalidacionToggle.classList.contains('active');
+            if (estado === 'convalidado' && modoConvalidacionActivo) {
+                ramoItem.style.cursor = 'not-allowed';
+                ramoItem.style.opacity = '0.95';
+            }
                     
             let tooltipHtml = '';
             if (estado === 'bloqueado' && ramo.prerrequisitos.length > 0) {
