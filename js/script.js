@@ -97,6 +97,13 @@ function desaprobarRamosCascada(ramoDesaprobado) {
 
 function handleRamoClick(ramo) {
     const estado = getEstadoRamo(ramo);
+    const convalidacionToggle = document.getElementById('convalidacionToggle');
+    const modoConvalidacionActivo = convalidacionToggle && convalidacionToggle.classList.contains('active');
+    
+    // Si es un ramo convalidado y el modo convalidación está activo, no permitir cambios
+    if (estado === 'convalidado' && modoConvalidacionActivo) {
+        return; // No hacer nada, mantener el ramo convalidado
+    }
     
     if (estado === 'convalidado') {
         ramosConvalidados.delete(ramo.nombre);
@@ -112,7 +119,6 @@ function handleRamoClick(ramo) {
     
     renderMalla(carreraActual);
 }
-
 function semestreTieneRamosDisponibles(semestre) {
     return semestre.ramos.some(ramo => 
         puedeTomarRamo(ramo) && !ramosAprobados.has(ramo.nombre) && !ramosConvalidados.has(ramo.nombre)
@@ -222,7 +228,13 @@ function renderMalla(carrera) {
 
 function resetProgress() {
     ramosAprobados.clear();
-    ramosConvalidados.clear();
+    
+    // Solo limpiar convalidados si NO estamos en modo convalidación activo
+    const convalidacionToggle = document.getElementById('convalidacionToggle');
+    if (!convalidacionToggle.classList.contains('active')) {
+        ramosConvalidados.clear();
+    }
+    
     renderMalla(carreraActual);
 }
 
@@ -263,6 +275,7 @@ function initializeProgress() {
     });
 }
 
+
 // Event listeners para navegación
 botones.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -275,15 +288,18 @@ botones.forEach(btn => {
         const convalidacionContainer = document.getElementById('convalidacionContainer');
         const convalidacionToggle = document.getElementById('convalidacionToggle');
         const advertenciaRequisitos = document.getElementById('advertenciaRequisitos');
+        const slider = convalidacionToggle.querySelector('.toggle-slider-content');
         
         if (btn.dataset.carrera === 'prosecucion') {
             convalidacionContainer.style.display = 'flex';
-            advertenciaRequisitos.style.display = 'block';
+            advertenciaRequisitos.style.display = 'flex';
             convalidacionToggle.classList.remove('active');
+            slider.innerHTML = '<span class="toggle-icon">📋</span><span>NORMAL</span>';
         } else {
             convalidacionContainer.style.display = 'none';
             advertenciaRequisitos.style.display = 'none';
             convalidacionToggle.classList.remove('active');
+            slider.innerHTML = '<span class="toggle-icon">📋</span><span>NORMAL</span>';
         }
         
         renderMalla(btn.dataset.carrera);
