@@ -85,6 +85,7 @@ const mallas = {
             ]
         }
     ],
+
     civil: [
         { 
             semestre: 'Primer Semestre', 
@@ -200,80 +201,81 @@ const mallas = {
             ]
         }
     ],
+
     prosecucion: [
         { 
             semestre: 'Primer Semestre', 
             ramos: [
-                { nombre: 'Paradigmas de Programación', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Estructura de Computadores', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Matemática Avanzada', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Inglés III', codigo: '-', prerrequisitos: [] }
+                { nombre: 'Paradigmas de Programación', codigo: '13103', prerrequisitos: [] },
+                { nombre: 'Estructura de Computadores', codigo: '13104', prerrequisitos: [] },
+                { nombre: 'Matemática Avanzada', codigo: '13105', prerrequisitos: [] },
+                { nombre: 'Inglés III', codigo: '13132', prerrequisitos: [] }
             ]
         },
         { 
             semestre: 'Segundo Semestre', 
             ramos: [
-                { nombre: 'Fundamentos de Ingeniería de Software', codigo: '-', prerrequisitos: ['Paradigmas de Programación'] },
-                { nombre: 'Análisis de Algoritmos y Estructura de Datos', codigo: '-', prerrequisitos: ['Paradigmas de Programación'] },
-                { nombre: 'Base de Datos', codigo: '-', prerrequisitos: ['Paradigmas de Programación'] },
-                { nombre: 'Organización de Computadores', codigo: '-', prerrequisitos: ['Estructura de Computadores'] },
-                { nombre: 'Inglés IV', codigo: '-', prerrequisitos: ['Inglés III'] }
+                { nombre: 'Fundamentos de Ingeniería de Software', codigo: '13106', prerrequisitos: ['Paradigmas de Programación'] },
+                { nombre: 'Análisis de Algoritmos y Estructura de Datos', codigo: '13107', prerrequisitos: [] },
+                { nombre: 'Base de Datos', codigo: '13108', prerrequisitos: ['Paradigmas de Programación'] },
+                { nombre: 'Organización de Computadores', codigo: '13109', prerrequisitos: ['Estructura de Computadores'] },
+                { nombre: 'Inglés IV', codigo: '13133', prerrequisitos: ['Inglés III'] }
             ]
         },
         { 
             semestre: 'Tercer Semestre', 
             ramos: [
-                { nombre: 'Interferencia y Modelos Estadísticos', codigo: '-', prerrequisitos: ['Matemática Avanzada'] },
-                { nombre: 'Procesamiento de Lenguajes Formales', codigo: '-', prerrequisitos: ['Matemática Avanzada'] },
-                { nombre: 'Redes de Computadores', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Finanzas y Contabilidad', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Sistemas Operativos', codigo: '-', prerrequisitos: [] }
+                { nombre: 'Interferencia y Modelos Estadísticos', codigo: '13110', prerrequisitos: [] },
+                { nombre: 'Procesamiento de Lenguajes Formales', codigo: '13111', prerrequisitos: ['Análisis de Algoritmos y Estructura de Datos'] },
+                { nombre: 'Redes de Computadores', codigo: '13112', prerrequisitos: ['Organización de Computadores'] },
+                { nombre: 'Finanzas y Contabilidad', codigo: '13113', prerrequisitos: [] },
+                { nombre: 'Sistemas Operativos', codigo: '13114', prerrequisitos: ['Organización de Computadores'] }
             ]
         },
         { 
             semestre: 'Cuarto Semestre', 
             ramos: [
-                { nombre: 'Ciencia, Tecnología y Sociedad', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Análisis de Datos', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Teoría de la Computación', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Algoritmos Numéricos', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Ingeniería de Sistemas', codigo: '-', prerrequisitos: [] }
+                { nombre: 'Ciencia, Tecnología y Sociedad', codigo: '13115', prerrequisitos: [] },
+                { nombre: 'Análisis de Datos', codigo: '13116', prerrequisitos: ['Inferencia y Modelos Estadísticos'] },
+                { nombre: 'Teoría de la Computación', codigo: '13117', prerrequisitos: ['Procesamiento de Lenguajes Formales', 'Paradigmas de Programación'] },
+                { nombre: 'Algoritmos Numéricos', codigo: '13118', prerrequisitos: ['Matemática Avanzada'] },
+                { nombre: 'Ingeniería de Sistemas', codigo: '13119', prerrequisitos: [] }
             ]
         },
         { 
             semestre: 'Quinto Semestre', 
             ramos: [
-                { nombre: 'Métodos de Optimización', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Modelación y Simulación', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Sistemas de Comunicación', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Evaluación de Proyectos', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Administración de Proyectos de Software', codigo: '-', prerrequisitos: [] }
+                { nombre: 'Métodos de Optimización', codigo: '13120', prerrequisitos: ['Matemática Avanzada', 'Teoría de la Computación'] },
+                { nombre: 'Modelación y Simulación', codigo: '13121', prerrequisitos: ['Algoritmos Numéricos'] },
+                { nombre: 'Sistemas de Comunicación', codigo: '13122', prerrequisitos: ['Redes de Computadores'] },
+                { nombre: 'Evaluación de Proyectos', codigo: '13123', prerrequisitos: ['Finanzas y Contabilidad'] },
+                { nombre: 'Administración de Proyectos de Software', codigo: '13124', prerrequisitos: ['Fundamentos de Ingeniería de Software', 'Base de Datos'] }
             ]
         },
         { 
             semestre: 'Sexto Semestre', 
             ramos: [
-                { nombre: 'Seguridad de Auditoría Informática', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Proyecto de Ingenería de Software', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Dirección y Gestión de Empresas', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Macroeconomía y Globalización', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Sistemas Distribuidos', codigo: '-', prerrequisitos: [] }
+                { nombre: 'Seguridad de Auditoría Informática', codigo: '13125', prerrequisitos: ['Sistemas de Comunicación'] },
+                { nombre: 'Proyecto de Ingeniería de Software', codigo: '13126', prerrequisitos: ['Administración de Proyectos de Software'] },
+                { nombre: 'Dirección y Gestión de Empresas', codigo: '13127', prerrequisitos: ['Finanzas y Contabilidad', 'Ciencia, Tecnología y Sociedad'] },
+                { nombre: 'Macroeconomía y Globalización', codigo: '13128', prerrequisitos: ['Ciencia, Tecnología y Sociedad'] },
+                { nombre: 'Sistemas Distribuidos', codigo: '13129', prerrequisitos: ['Sistemas de Comunicación'] }
             ]
         },
         { 
             semestre: 'Séptimo Semestre', 
             ramos: [
-                { nombre: 'Tópicos de Especialidad I', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Tópicos de Especialidad II', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Tópicos de Especialidad III', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Proyecto de Ingeniería de Software', codigo: '-', prerrequisitos: [] },
-                { nombre: 'Seminario de Informática', codigo: '-', prerrequisitos: [] }
+                { nombre: 'Tópicos de Especialidad I', codigo: '13130', prerrequisitos: [] },
+                { nombre: 'Tópicos de Especialidad II', codigo: '13131', prerrequisitos: [] },
+                { nombre: 'Tópicos de Especialidad III', codigo: '13132', prerrequisitos: [] },
+                { nombre: 'Proyecto de Ingeniería de Software', codigo: '13133', prerrequisitos: ['Proyecto de Ingeniería de Software', 'Evaluación de Proyectos'] },
+                { nombre: 'Seminario de Informática', codigo: '13134', prerrequisitos: ['Proyecto de Ingeniería de Software'] }
             ]
         },
         { 
             semestre: 'Octavo Semestre', 
             ramos: [
-                { nombre: 'Trabajo de Titulación', codigo: '-', prerrequisitos: ['Seminario de Computación e Informática'] },
+                { nombre: 'Trabajo de Titulación', codigo: '-', prerrequisitos: ['Seminario de Informática'] },
                 { nombre: 'Tópicos de Especialidad IV', codigo: '-', prerrequisitos: [] }
             ]
         }
