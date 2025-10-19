@@ -268,7 +268,7 @@ const mallas = {
                 { nombre: 'Tópicos de Especialidad I', codigo: '13130', prerrequisitos: [] },
                 { nombre: 'Tópicos de Especialidad II', codigo: '13131', prerrequisitos: [] },
                 { nombre: 'Tópicos de Especialidad III', codigo: '13132', prerrequisitos: [] },
-                { nombre: 'Proyecto de Ingeniería de Software', codigo: '13133', prerrequisitos: ['Proyecto de Ingeniería de Software', 'Evaluación de Proyectos'] },
+                { nombre: 'Proyecto de Ingeniería Informática', codigo: '13133', prerrequisitos: ['Proyecto de Ingeniería de Software', 'Evaluación de Proyectos'] },
                 { nombre: 'Seminario de Informática', codigo: '13134', prerrequisitos: ['Proyecto de Ingeniería de Software'] }
             ]
         },
