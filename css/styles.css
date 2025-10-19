@@ -21,12 +21,34 @@
     box-sizing: border-box;
 }
 
+html {
+    background: var(--primary-gradient);
+    background-attachment: fixed;
+    overscroll-behavior-y: none;
+    min-height: 100%;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: var(--primary-gradient);
+    background-attachment: fixed;
     min-height: 100vh;
+    min-height: 100dvh;
     overflow-x: hidden;
     position: relative;
+    overscroll-behavior-y: contain;
+    overscroll-behavior-x: none;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    right: 0;
+    bottom: -100vh;
+    background: var(--primary-gradient);
+    z-index: -2;
 }
 
 /* Elementos de fondo animados */
@@ -81,10 +103,11 @@ body {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
-    padding: 15px 0;
+    padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 200;
+    transition: padding 0.3s ease;
 }
 
 .nav-container {
@@ -113,6 +136,8 @@ body {
     flex-wrap: wrap;
     justify-content: flex-end;
     max-width: 600px;
+    transition: all 0.4s ease;
+    overflow: visible;
 }
 
 .nav-button {
@@ -1069,6 +1094,36 @@ body {
         line-height: 1.5;
     }
     
+    /* Toggle más pequeño en móvil */
+    .toggle-switch {
+        width: 260px;
+        height: 52px;
+        border-radius: 26px;
+    }
+    
+    .toggle-slider {
+        width: 132px;
+        height: 44px;
+        font-size: 0.7rem;
+        border-radius: 22px;
+    }
+    
+    .toggle-slider::before {
+        border-radius: 22px;
+    }
+    
+    .toggle-switch.active .toggle-slider {
+        transform: translateX(118px);
+    }
+    
+    .toggle-label-left, .toggle-label-right {
+        font-size: 0.7rem;
+    }
+    
+    .toggle-icon {
+        font-size: 0.85rem;
+    }
+    
     .semester-warning-icon {
         width: 32px;
         height: 32px;
@@ -1145,6 +1200,36 @@ body {
     .info-box .content {
         font-size: 11.5px;
     }
+    
+    /* Toggle aún más pequeño en móvil chico */
+    .toggle-switch {
+        width: 230px;
+        height: 50px;
+        border-radius: 24px;
+    }
+    
+    .toggle-slider {
+        width: 118px;
+        height: 42px;
+        font-size: 0.65rem;
+        border-radius: 20px;
+    }
+    
+    .toggle-slider::before {
+        border-radius: 20px;
+    }
+    
+    .toggle-switch.active .toggle-slider {
+        transform: translateX(103px);
+    }
+    
+    .toggle-label-left, .toggle-label-right {
+        font-size: 0.65rem;
+    }
+    
+    .toggle-icon {
+        font-size: 0.8rem;
+    }
 
     .semester-warning-icon {
         width: 24px;
@@ -1185,9 +1270,16 @@ body {
         --disabled-text: rgba(255, 255, 255, 0.35);
     }
     
+    html {
+        background: linear-gradient(135deg, #1a1333 0%, #2d1f4d 100%);
+        background-attachment: fixed;
+        overscroll-behavior-y: none;
+    }
+    
     body {
         background: linear-gradient(135deg, #1a1333 0%, #2d1f4d 100%);
         background-attachment: fixed;
+        overscroll-behavior-y: none;
     }
     
     .shape {
@@ -1255,7 +1347,7 @@ body {
     }
     
     .subject-item.convalidado {
-        background: linear-gradient(135deg, #ffbf48 0%, #c27605 100%);
+        background: linear-gradient(135deg, #ffbd43 0%, #c08d01 100%);
         color: #66470e;
         border-left-color: #f39a15;
         box-shadow: 0 4px 15px rgba(217, 119, 6, 0.25);
