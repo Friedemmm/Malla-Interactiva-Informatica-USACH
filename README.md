@@ -27,4 +27,11 @@ Permite marcar ramos aprobados, calcular progreso y ver cuántos semestres compl
   - Semestres completos.
   - Ramos aprobados.  
   - Progreso en %. 
-- 🔄 Botón para reiniciar progreso. 
+- 🔄 Botón para reiniciar progreso.  
+- 📱 **Diseño responsivo:** optimizado para distintos tamaños de pantalla, incluyendo dispositivos móviles.  
+- 🌙 **Modo oscuro:** se adapta automáticamente según las preferencias del sistema.  
+
+> ⚠️ **Nota sobre Samsung Internet:**  
+> Este navegador presenta limitaciones con la detección automática del modo oscuro.  
+> Para habilitarlo correctamente, ve a:  
+> **☰ → Configuración → Funciones útiles → Labs → Activar “Usar tema oscuro del sitio web”**.
