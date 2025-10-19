@@ -83,7 +83,7 @@ body {
     padding: 15px 0;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200;
 }
 
 .nav-container {
@@ -300,18 +300,20 @@ body {
     padding: 25px;
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; 
     min-height: 350px;
 }
 
 .semester-card::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -1px;
     left: 0;
     right: 0;
     height: 4px;
     background: var(--accent-gradient);
+    border-radius: 20px 20px 0 0;
+    z-index: 1;
 }
 
 .semester-card:hover {
@@ -327,6 +329,8 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    position: relative;
+    z-index: 2;
 }
 
 .semester-buttons {
@@ -429,16 +433,16 @@ body {
 }
 
 .subject-item.convalidado {
-    background: linear-gradient(135deg, hsla(56, 100%, 56%, 0.753) 0%, #ffba3ad2 100%);
-    color: #6d5900;
+    background: linear-gradient(135deg, hsla(56, 100%, 61%, 0.747) 0%, #ffc558e5 100%);
+    color: #75620a;
     font-weight: 600;
     border-left-color: #b69609;
     box-shadow: 0 4px 15px rgba(172, 160, 0, 0.3);
 }
 
 .subject-item.convalidado:hover {
-    background: linear-gradient(135deg, hsl(56, 79%, 46%) 0%, #ffb223d2 100%);
-    color: #6d5900;
+    background: linear-gradient(135deg, hsla(56, 100%, 61%, 0.747) 0%, #ffc558e5 100%);
+    color: #75620a;
     transform: translateX(5px) scale(1.02);
 }
 
@@ -467,6 +471,86 @@ body {
     color: var(--text-light);
     border-left-color: #4facfe;
     animation: disponible-pulse 2s ease-in-out infinite;
+}
+
+/* Contenedor de íconos de advertencia */
+#warningIconsContainer {
+    position: relative;
+    width: 100%;
+    height: 0;
+    z-index: 100;
+}
+
+/* Ícono de advertencia flotante */
+.semester-warning-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    border-radius: 50%;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: help;
+    position: absolute;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+    animation: pulse-warning 2s ease-in-out infinite;
+    z-index: 50; 
+    pointer-events: auto;
+    transition: top 0.3s ease, box-shadow 0.3s ease;
+}
+
+@keyframes pulse-warning {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(255, 107, 107, 0.5);
+    }
+}
+
+.semester-warning-tooltip {
+    position: absolute;
+    background: rgba(255, 58, 58, 0.911);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 400;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: normal;
+    width: max-content;
+    max-width: 350px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 60;
+    box-shadow: 0 4px 15px rgb(155, 0, 0);
+    border: 1px solid rgba(255, 107, 107, 0.5);
+    pointer-events: none;
+    line-height: 1.5;
+}
+
+.semester-warning-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(255, 58, 58, 0.911);
+}
+
+.semester-warning-icon:hover .semester-warning-tooltip {
+    opacity: 1;
+    visibility: visible;
 }
 
 @keyframes disponible-pulse {
@@ -906,6 +990,18 @@ body {
     .info-box .content {
         font-size: 12.5px;
     }
+
+    .semester-warning-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+
+    .semester-warning-tooltip {
+        font-size: 12px;
+        padding: 8px 12px;
+        max-width: 200px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -971,6 +1067,28 @@ body {
         font-size: 12px;
         line-height: 1.5;
     }
+    
+    .semester-warning-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+
+    .semester-warning-tooltip {
+        font-size: 16px; 
+        padding: 10px 10px;
+        max-width: 260px; 
+        line-height: 1.3;
+        left: auto;
+        right: 0px;
+        transform: translateX(0);
+    }
+
+    .semester-warning-tooltip::after {
+        border-width: 8px;
+        left: auto;
+        right: 0px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1013,6 +1131,8 @@ body {
     .info-box {
         padding: 8px 12px;
         gap: 8px;
+        margin-left: 10px;
+        margin-right: 10px;
     }
     
     .info-box .icon {
@@ -1023,5 +1143,27 @@ body {
     
     .info-box .content {
         font-size: 11.5px;
+    }
+
+    .semester-warning-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+    }
+
+    .semester-warning-tooltip {
+        font-size: 10px;
+        padding: 6px 8px;
+        max-width: 150px;
+        line-height: 1.3;
+        left: auto;
+        right: 0;
+        transform: translateX(0);
+    }
+
+    .semester-warning-tooltip::after {
+        border-width: 6px;
+        left: auto;
+        right: 10px; 
     }
 }
