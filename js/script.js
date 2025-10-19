@@ -54,6 +54,11 @@ function generateStats(carrera) {
 }
 
 function puedeTomarRamo(ramo) {
+    // Si el ramo está convalidado, siempre está disponible (independiente de prerrequisitos)
+    if (ramosConvalidados.has(ramo.nombre)) {
+        return true;
+    }
+    
     if (ramo.prerrequisitos.length === 0) {
         return true;
     }
@@ -61,6 +66,7 @@ function puedeTomarRamo(ramo) {
 }
 
 function getEstadoRamo(ramo) {
+    // SIEMPRE verificar primero si está convalidado
     if (ramosConvalidados.has(ramo.nombre)) {
         return 'convalidado';
     } 
@@ -78,9 +84,16 @@ function getEstadoRamo(ramo) {
 function desaprobarRamosCascada(ramoDesaprobado) {
     const data = mallas[carreraActual];
     const ramosADesaprobar = [];
+    const convalidacionToggle = document.getElementById('convalidacionToggle');
+    const modoConvalidacionActivo = convalidacionToggle && convalidacionToggle.classList.contains('active');
             
     data.forEach(semestre => {
         semestre.ramos.forEach(ramo => {
+            // Si el ramo está convalidado y el modo convalidación está activo, NO tocarlo
+            if (ramosConvalidados.has(ramo.nombre) && modoConvalidacionActivo) {
+                return; // Saltar este ramo, no desaprobarlo
+            }
+            
             if ((ramosAprobados.has(ramo.nombre) || ramosConvalidados.has(ramo.nombre)) && 
                 ramo.prerrequisitos.includes(ramoDesaprobado)) {
                 ramosADesaprobar.push(ramo.nombre);
@@ -89,9 +102,16 @@ function desaprobarRamosCascada(ramoDesaprobado) {
     });
             
     ramosADesaprobar.forEach(nombreRamo => {
-        ramosAprobados.delete(nombreRamo);
-        ramosConvalidados.delete(nombreRamo);
-        desaprobarRamosCascada(nombreRamo);
+        // Solo desaprobar si está en ramosAprobados
+        if (ramosAprobados.has(nombreRamo)) {
+            ramosAprobados.delete(nombreRamo);
+            desaprobarRamosCascada(nombreRamo);
+        }
+        // Solo eliminar convalidados si NO estamos en modo convalidación activo
+        if (ramosConvalidados.has(nombreRamo) && !modoConvalidacionActivo) {
+            ramosConvalidados.delete(nombreRamo);
+            desaprobarRamosCascada(nombreRamo);
+        }
     });
 }
 
@@ -158,10 +178,17 @@ function renderMalla(carrera) {
     carreraActual = carrera;
     container.innerHTML = '';
     carreraTitle.textContent = `${carreraTitles[carrera]}`;
+    
+    // Ocultar warning
+    const warningIcon = document.getElementById('warning-semestre-7');
+    if (warningIcon) {
+        warningIcon.style.display = 'none';
+    }
         
     mallas[carrera].forEach((bloque, index) => {
         const semestreDiv = document.createElement('div');
         semestreDiv.className = 'semester-card';
+        semestreDiv.dataset.semestreIndex = index;
                 
         const title = document.createElement('h3');
         title.className = 'semester-title';
@@ -170,6 +197,13 @@ function renderMalla(carrera) {
             ${bloque.semestre}
         `;
         semestreDiv.appendChild(title);
+
+        // Agregar ícono de advertencia FUERA de la tarjeta
+        if (index === 6 && carrera === 'prosecucion') {
+            const warningIcon = document.getElementById('warning-semestre-7');
+            warningIcon.dataset.targetSemestre = index;
+            warningIcon.style.display = 'inline-flex';
+        }
 
         const botonesContainer = document.createElement('div');
         botonesContainer.className = 'semester-buttons';
@@ -233,10 +267,64 @@ function renderMalla(carrera) {
         });
 
         semestreDiv.appendChild(ramosContainer);
+        
+        // Agregar listeners de hover para mover el warning junto con el semestre
+        semestreDiv.addEventListener('mouseenter', () => {
+            const warning = document.querySelector(`.semester-warning-icon[data-target-semestre="${index}"]`);
+            if (warning) {
+                // Mover inmediatamente sin esperar
+                requestAnimationFrame(() => {
+                    const currentTop = parseInt(warning.style.top);
+                    warning.style.top = `${currentTop - 10}px`;
+                });
+            }
+        });
+        
+        semestreDiv.addEventListener('mouseleave', () => {
+            const warning = document.querySelector(`.semester-warning-icon[data-target-semestre="${index}"]`);
+            if (warning) {
+                requestAnimationFrame(() => {
+                    const currentTop = parseInt(warning.style.top);
+                    warning.style.top = `${currentTop + 10}px`;
+                });
+            }
+        });
+        
         container.appendChild(semestreDiv);
     });
-            
+    
+    // Posicionar warnings después de que los semestres estén renderizados
+    setTimeout(actualizarPosicionWarnings, 100);
+
     statsContainer.innerHTML = generateStats(carrera);
+}
+
+// Función para actualizar posición de warnings
+function actualizarPosicionWarnings() {
+    const warnings = document.querySelectorAll('.semester-warning-icon');
+    warnings.forEach(warning => {
+        const targetIndex = warning.dataset.targetSemestre;
+        const targetCard = document.querySelector(`[data-semestre-index="${targetIndex}"]`);
+        if (targetCard) {
+            const rect = targetCard.getBoundingClientRect();
+            const containerRect = document.getElementById('mallaContainer').getBoundingClientRect();
+            
+            // Ajustar offset según el tamaño de pantalla
+            let rightOffset;
+            if (window.innerWidth <= 480) {
+                rightOffset = 35; // Mobile - más adentro para evitar overflow
+            } else if (window.innerWidth <= 768) {
+                rightOffset = 40; // Tablet
+            } else if (window.innerWidth <= 900) {
+                rightOffset = 45; // Tablet grande
+            } else {
+                rightOffset = 50; // Desktop
+            }
+            
+            warning.style.top = `${rect.top - containerRect.top + 20}px`;
+            warning.style.left = `${rect.left - containerRect.left + rect.width - rightOffset}px`;
+        }
+    });
 }
 
 function resetProgress() {
@@ -251,6 +339,7 @@ function resetProgress() {
     renderMalla(carreraActual);
 }
 
+// Ramos a convalidar
 function aplicarConvalidacion() {
     const ramosConvalidadosLista = [
         'Paradigmas de Programación',
@@ -266,7 +355,8 @@ function aplicarConvalidacion() {
         'Ingeniería de Sistemas',
         'Evaluación de Proyectos',
         'Tópicos de Especialidad IV',
-        'Proyecto de Ingeniería de Software'
+        'Proyecto de Ingeniería de Software',
+        'Trabajo de Titulación'
     ];
     
     ramosAprobados.clear();
@@ -343,3 +433,13 @@ convalidacionToggle.addEventListener('click', () => {
 renderMalla('ejecucion');
 
 initializeProgress();
+
+// Reposicionar warnings cuando cambia el tamaño de ventana
+window.addEventListener('resize', () => {
+    actualizarPosicionWarnings();
+});
+
+// Reposicionar warnings cuando se hace scroll
+window.addEventListener('scroll', () => {
+    actualizarPosicionWarnings();
+});
