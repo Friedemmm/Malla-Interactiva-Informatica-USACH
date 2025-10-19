@@ -59,14 +59,16 @@ body::before {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
+    overflow: hidden;
 }
 
 .shape {
     position: absolute;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.103);
     animation: float 6s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.13);
 }
 
 .shape:nth-child(1) {
@@ -75,6 +77,7 @@ body::before {
     top: 20%;
     left: 10%;
     animation-delay: 0s;
+    background: rgba(255, 255, 255, 0.158);
 }
 
 .shape:nth-child(2) {
@@ -83,6 +86,7 @@ body::before {
     top: 60%;
     right: 20%;
     animation-delay: 2s;
+    background: rgba(255, 255, 255, 0.123);
 }
 
 .shape:nth-child(3) {
@@ -91,6 +95,7 @@ body::before {
     bottom: 20%;
     left: 30%;
     animation-delay: 4s;
+    background: rgba(255, 255, 255, 0.096);
 }
 
 @keyframes float {
@@ -1283,7 +1288,23 @@ body::before {
     }
     
     .shape {
-        background: rgba(118, 75, 162, 0.2);
+        background: rgba(167, 139, 250, 0.13); 
+        box-shadow: 0 0 30px rgba(167, 139, 250, 0.15);
+    }
+
+    .shape:nth-child(1) {
+    background: rgba(167, 139, 250, 0.096);
+    box-shadow: 0 0 40px rgba(167, 139, 250, 0.2);
+    }
+
+    .shape:nth-child(2) {
+        background: rgba(79, 172, 254, 0.116);
+        box-shadow: 0 0 40px rgba(79, 172, 254, 0.2);
+    }
+
+    .shape:nth-child(3) {
+        background: rgba(241, 147, 251, 0.13);
+        box-shadow: 0 0 40px rgba(240, 147, 251, 0.2);
     }
     
     .header {
