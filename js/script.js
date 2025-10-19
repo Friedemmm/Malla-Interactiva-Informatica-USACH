@@ -4,6 +4,7 @@ const statsContainer = document.getElementById('statsContainer');
 const carreraTitle = document.getElementById('carrera-title');
 const botones = document.querySelectorAll('.nav-button');
 
+
 // Estado global para manejar ramos aprobados
 let ramosAprobados = new Set();
 let carreraActual = 'ejecucion';
@@ -390,7 +391,6 @@ function initializeProgress() {
     });
 }
 
-
 // Event listeners para navegación
 botones.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -440,6 +440,33 @@ convalidacionToggle.addEventListener('click', () => {
         ramosAprobados.clear();
         ramosConvalidados.clear();
         renderMalla(carreraActual);
+    }
+});
+
+// Header dinámico - se oculta al pasar "Malla Curricular"
+const header = document.querySelector('.header');
+const navLinks = document.querySelector('.nav-links');
+const mallaCurricularSection = document.querySelector('.curriculum-section');
+
+window.addEventListener('scroll', () => {
+    const mallaCurricularTop = mallaCurricularSection.offsetTop;
+    const currentScrollY = window.scrollY;
+    
+    // Ocultar cuando pase el título "Malla Curricular" (con offset de 100px)
+    if (currentScrollY > mallaCurricularTop - 100) {
+        navLinks.style.maxHeight = '0';
+        navLinks.style.opacity = '0';
+        navLinks.style.marginTop = '0';
+        navLinks.style.overflow = 'hidden';
+        header.style.padding = '8px 0';
+    }
+    // Mostrar cuando suba antes de "Malla Curricular"
+    else {
+        navLinks.style.maxHeight = '200px';
+        navLinks.style.opacity = '1';
+        navLinks.style.marginTop = '';
+        navLinks.style.overflow = 'visible';
+        header.style.padding = '10px 0';
     }
 });
 
