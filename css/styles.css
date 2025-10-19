@@ -12,6 +12,7 @@
     --text-light: rgba(255, 255, 255, 0.9);
     --disabled-bg: rgba(255, 255, 255, 0.05);
     --disabled-text: rgba(255, 255, 255, 0.4);
+    color-scheme: light dark;
 }
 
 * {
@@ -1165,5 +1166,208 @@ body {
         border-width: 6px;
         left: auto;
         right: 10px; 
+    }
+}
+
+/* Modo oscuro - Colores originales adaptados */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-gradient: linear-gradient(135deg, #1a1333 0%, #2d1f4d 100%);
+        --secondary-gradient: linear-gradient(135deg, #cc5bd8 0%, #c54355 100%);
+        --accent-gradient: linear-gradient(135deg, #5b9fd9 0%, #20a5d6 100%);
+        --dark-gradient: linear-gradient(135deg, #1a1f2e 0%, #2d3748 100%);
+        --glass-bg: rgba(255, 255, 255, 0.06);
+        --glass-border: rgba(255, 255, 255, 0.12);
+        --text-primary: #ffffff;
+        --text-secondary: #b4b4b4;
+        --text-light: rgba(255, 255, 255, 0.95);
+        --disabled-bg: rgba(255, 255, 255, 0.04);
+        --disabled-text: rgba(255, 255, 255, 0.35);
+    }
+    
+    body {
+        background: linear-gradient(135deg, #1a1333 0%, #2d1f4d 100%);
+        background-attachment: fixed;
+    }
+    
+    .shape {
+        background: rgba(118, 75, 162, 0.2);
+    }
+    
+    .header {
+        background: rgba(26, 19, 51, 0.7);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(118, 75, 162, 0.3);
+    }
+    
+    .info-box {
+        background: rgba(253, 198, 33, 0.171);
+        backdrop-filter: blur(15px);
+        border: 1.5px solid rgba(255, 193, 7, 0.35);
+    }
+    
+    .info-box .content {
+        color: #fbbf24;
+    }
+    
+    .info-box .content strong {
+        color: #fcd34d;
+    }
+    
+    .info-box .icon {
+        background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    }
+    
+    .semester-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .semester-card::before {
+        background: var(--accent-gradient);
+    }
+    
+    .semester-card:hover {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        border-color: rgba(118, 75, 162, 0.3);
+    }
+    
+    .subject-item {
+        background: rgba(255, 255, 255, 0.05);
+        border-left-color: transparent;
+    }
+    
+    .subject-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-left-color: #5b9fd9;
+    }
+    
+    .subject-item.aprobado {
+        background: linear-gradient(135deg, #0b8d4c 0%, #059669 100%);
+        border-left-color: #34d399;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+    
+    .subject-item.aprobado:hover {
+        background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+    
+    .subject-item.convalidado {
+        background: linear-gradient(135deg, #ffbf48 0%, #c27605 100%);
+        color: #66470e;
+        border-left-color: #f39a15;
+        box-shadow: 0 4px 15px rgba(217, 119, 6, 0.25);
+    }
+    
+    .subject-item.convalidado:hover {
+        background: linear-gradient(135deg, #ffb937 0%, #b66d00 100%);
+        color: #66470e;
+    }
+    
+    .subject-item.bloqueado {
+        background: rgba(71, 85, 105, 0.25);
+        color: rgba(255, 255, 255, 0.35);
+        border-left-color: #64748b;
+    }
+    
+    .subject-item.bloqueado:hover {
+        background: rgba(71, 85, 105, 0.25);
+        border-left-color: #64748b;
+    }
+    
+    .subject-item.disponible {
+        background: rgba(91, 159, 217, 0.15);
+        border-left-color: #5b9fd9;
+    }
+    
+    @keyframes disponible-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(91, 159, 217, 0.4); }
+        50% { box-shadow: 0 0 0 8px rgba(91, 159, 217, 0); }
+    }
+    
+    .complete-semester-btn {
+        background: var(--accent-gradient);
+    }
+    
+    .clear-semester-btn {
+        background: var(--secondary-gradient);
+    }
+    
+    .complete-semester-btn:disabled,
+    .clear-semester-btn:disabled {
+        background: rgba(71, 85, 105, 0.3);
+        color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .toggle-switch {
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    
+    .toggle-switch::before {
+        background: linear-gradient(135deg, #8b7fd8 0%, #9b8bc4 100%);
+    }
+    
+    .toggle-switch.active {
+        border-color: rgba(139, 127, 216, 0.4);
+        box-shadow: 0 12px 40px rgba(139, 127, 216, 0.25);
+    }
+    
+    .toggle-slider {
+        background: linear-gradient(135deg, #3a3f5c 0%, #2d3348 100%);
+        color: #d4d4d8;
+    }
+    
+    .toggle-slider::before {
+        background: linear-gradient(135deg, #4a4f6c 0%, #3d4258 100%);
+    }
+    
+    .toggle-switch.active .toggle-slider {
+        background: linear-gradient(135deg, #3a3f5c 0%, #2d3348 100%);
+        color: #d8d0f5;
+    }
+    
+    .stats-section {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .stat-number {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .reset-button {
+        background: var(--dark-gradient);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .reset-button:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    .footer {
+        background: linear-gradient(135deg, #1a1333 0%, #1f1740 100%);
+    }
+    
+    .footer::before {
+        background: var(--accent-gradient);
+    }
+    
+    .footer-avatar {
+        background: var(--secondary-gradient);
+        box-shadow: 0 4px 15px rgba(214, 123, 180, 0.4);
+    }
+    
+    .footer-links a:hover {
+        color: #5b9fd9;
+        background: rgba(91, 159, 217, 0.1);
+        border-color: #5b9fd9;
     }
 }
