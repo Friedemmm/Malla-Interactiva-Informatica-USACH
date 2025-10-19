@@ -11,40 +11,41 @@
 </head>
 <body>
     
-    <!-- Elementos de fondo animados -->
-    <div class="bg-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
+<!-- Elementos de fondo animados -->
+<div class="bg-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
 
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">Universidad de Santiago<br>de Chile</div>
-            <ul class="nav-links">
-                <li><button class="nav-button active" data-carrera="ejecucion">Ingeniería de Ejecución<br>en Computación e Informática</button></li>
-                <li><button class="nav-button" data-carrera="civil">Ingeniería Civil<br>en Informática</button></li>
-                <li><button class="nav-button" data-carrera="prosecucion">Prosecución en<br>Ingeniería Civil en Informática</button></li>
-            </ul>
-        </nav>
-    </header>
+<!-- Header -->
+<header class="header">
+    <nav class="nav-container">
+        <div class="logo">Universidad de Santiago<br>de Chile</div>
+        <ul class="nav-links">
+            <li><button class="nav-button active" data-carrera="ejecucion">Ingeniería de Ejecución<br>en Computación e Informática</button></li>
+            <li><button class="nav-button" data-carrera="civil">Ingeniería Civil<br>en Informática</button></li>
+            <li><button class="nav-button" data-carrera="prosecucion">Prosecución en<br>Ingeniería Civil en Informática</button></li>
+        </ul>
+    </nav>
+</header>
     
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1 id="carrera-title">Ingeniería de Ejecución en Computación e Informática</h1>
-    </section>
-    
-    <!-- Curriculum Section -->
+<!-- Hero Section -->
+<section class="hero">
+    <h1 id="carrera-title">Ingeniería de Ejecución en Computación e Informática</h1>
+</section>  
+
+<!-- Curriculum Section -->
 <section class="curriculum-section" id="programa">
     <h2 class="section-title">Malla Curricular</h2>
     
-<div class="info-box" id="advertenciaRequisitos" style="display: none;">
-    <span class="icon">i</span>
-    <span class="content">
-        <strong>Requisitos para convalidación:</strong> Título de Ingeniero de Ejecución en Computación e Informática (USACH) o asignaturas cursadas en el DIINF USACH.
-    </span>
-</div>
+    <div class="info-box" id="advertenciaRequisitos" style="display: none;">
+        <span class="icon">i</span>
+        <span class="content">
+            <strong>Requisitos para convalidación:</strong> Título de Ingeniero de Ejecución en Computación e Informática (USACH) o asignaturas cursadas en el DIINF USACH.
+            <br><i>Egresados de otra ingeniería o carreras afines no cursadas en el DIINF tendrán otros ramos a convalidar. Más información en <a href="https://usach.cl/prosecuciones-facultad-ingenieria-7?_gl=1*ngjp5b*_ga*MTA3MTA4MTY0Ni4xNzU1NDkxNTky*_ga_YWWB4RW5H0*czE3NjA4NTM5OTgkbzIkZzAkdDE3NjA4NTM5OTgkajYwJGwwJGgw&_ga=2.198999462.823723766.1760853999-1071081646.1755491592" class="info-link">USACH</a>.</i>
+        </span>
+    </div>
 
     <button class="reset-button" onclick="resetProgress()">🔄 Reiniciar Progreso</button>
     <div class="toggle-container" id="convalidacionContainer" style="display: none;">
@@ -62,10 +63,20 @@
         </div>
     </div>
     
-    <div class="curriculum-grid" id="mallaContainer">
-        <!-- El contenido se generará dinámicamente -->
+    <!-- Contenedor para íconos de advertencia -->
+    <div id="warningIconsContainer">
+        <div class="semester-warning-icon" id="warning-semestre-7" style="display: none;">
+            <div class="semester-warning-tooltip">
+                Quedan abiertos los requisitos de los tópicos,<br>porque serán establecidos por el DIINF<br>dependiendo de la especialidad elegida.
+            </div>
+            !
+        </div>
     </div>
-    
+
+    <div class="curriculum-grid" id="mallaContainer">
+    <!-- El contenido se generará dinámicamente -->
+    </div>
+        
     <!-- Stats Section -->
     <div class="stats-section">
         <div class="stats-grid" id="statsContainer">
@@ -74,11 +85,11 @@
     </div>
 </section>
     
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-signature">
-                <div class="footer-avatar">F</div>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-signature">
+            <div class="footer-avatar">F</div>
                 <div>
                     <div class="footer-username">@Friedemmm</div>
                 </div>
@@ -89,12 +100,12 @@
             </div>
             <br>
         </div>
-        <div class="footer-description">
-            Malla interactiva correspondiente a las carreras del<br>Departamento de Informática de la Universidad de Santiago de Chile (USACH).
-        </div>
-    </footer>
+        <div class="footer-description">Malla interactiva correspondiente a las carreras del<br>Departamento de Informática de la Universidad de Santiago de Chile (USACH).</div>
+    </div>
+</footer>
 
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
+
 </body>
 </html>
