@@ -236,7 +236,7 @@ const mallas = {
             semestre: 'Cuarto Semestre', 
             ramos: [
                 { nombre: 'Ciencia, Tecnología y Sociedad', codigo: '13115', prerrequisitos: [] },
-                { nombre: 'Análisis de Datos', codigo: '13116', prerrequisitos: ['Inferencia y Modelos Estadísticos'] },
+                { nombre: 'Análisis de Datos', codigo: '13116', prerrequisitos: ['Interferencia y Modelos Estadísticos'] },
                 { nombre: 'Teoría de la Computación', codigo: '13117', prerrequisitos: ['Procesamiento de Lenguajes Formales', 'Paradigmas de Programación'] },
                 { nombre: 'Algoritmos Numéricos', codigo: '13118', prerrequisitos: ['Matemática Avanzada'] },
                 { nombre: 'Ingeniería de Sistemas', codigo: '13119', prerrequisitos: [] }
@@ -275,8 +275,8 @@ const mallas = {
         { 
             semestre: 'Octavo Semestre', 
             ramos: [
-                { nombre: 'Trabajo de Titulación', codigo: '-', prerrequisitos: ['Seminario de Informática'] },
-                { nombre: 'Tópicos de Especialidad IV', codigo: '-', prerrequisitos: [] }
+                { nombre: 'Trabajo de Titulación', codigo: '13135', prerrequisitos: ['Seminario de Informática'] },
+                { nombre: 'Tópicos de Especialidad IV', codigo: '13136', prerrequisitos: [] }
             ]
         }
     ]
