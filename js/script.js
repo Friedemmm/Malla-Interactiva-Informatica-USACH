@@ -13,8 +13,20 @@ let ramosConvalidados = new Set();
 function generateStats(carrera) {
     const data = mallas[carrera];
     const totalSemestres = data.length;
-    const totalRamos = data.reduce((total, semestre) => total + semestre.ramos.length, 0);
-    const ramosAprobadosCount = ramosAprobados.size + ramosConvalidados.size;
+    
+    // Calcular total de ramos únicos (sin contar duplicados por convalidación)
+    const ramosUnicos = new Set();
+    data.forEach(semestre => {
+        semestre.ramos.forEach(ramo => {
+            ramosUnicos.add(ramo.nombre);
+        });
+    });
+    const totalRamos = ramosUnicos.size;
+    
+    // Contar ramos aprobados y convalidados (sin duplicar)
+    const ramosCompletados = new Set([...ramosAprobados, ...ramosConvalidados]);
+    const ramosAprobadosCount = ramosCompletados.size;
+    
     const porcentajeCompleto = Math.round((ramosAprobadosCount / totalRamos) * 100);
     
     const semestresCompletados = data.filter(semestre => 
@@ -424,6 +436,8 @@ convalidacionToggle.addEventListener('click', () => {
     } 
     else {
         slider.innerHTML = '<span class="toggle-icon">📋</span><span>NORMAL</span>';
+        // Reiniciar todo cuando vuelve a modo normal
+        ramosAprobados.clear();
         ramosConvalidados.clear();
         renderMalla(carreraActual);
     }
