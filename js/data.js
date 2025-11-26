@@ -349,7 +349,7 @@ const advertencias = {
         mostrarToggle: true
     },
     magister: {
-        texto: '<strong>Requisitos de Admisión:</strong> Título profesional de Ingeniero o Licenciado en áreas relacionadas con la informática o la ingeniería, emitido por una universidad reconocida.<br><i>Se recomienda revisar los requisitos específicos en la página oficial del programa.</i>',
+        texto: '<strong>Requisitos de Admisión:</strong> Poseer grado de Licenciado o Título Profesional equivalente (mínimo 8 semestres) en Ingeniería Informática, Ciencias de la Computación o Ingeniería afín.<br><i>En cualquier caso el Comité del Programa evaluará la formación académica del postulante. Más información en <a href="https://informatica.usach.cl/postgrado/magister-ingenieria-informatica/">USACH</a>.</i>',
         mostrarToggle: false
     }
     // Puedes agregar más advertencias para otras carreras
@@ -358,4 +358,5 @@ const advertencias = {
     //     mostrarToggle: false <-- Para convalidaciones.
     // }
 };
+
 
