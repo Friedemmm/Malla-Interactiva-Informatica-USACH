@@ -30,17 +30,42 @@ function generateStats(carrera) {
     
     const porcentajeCompleto = Math.round((ramosAprobadosCount / totalRamos) * 100);
     
-    const semestresCompletados = data.filter(semestre => 
+    // SISTEMA DUAL: Calcular por semestres completos Y por porcentaje
+    
+    // 1. Calcular semestres COMPLETOS (todos los ramos aprobados)
+    const semestresCompletadosReales = data.filter(semestre => 
         semestre.ramos.every(ramo => 
             ramosAprobados.has(ramo.nombre) || ramosConvalidados.has(ramo.nombre)
         )
     ).length;
     
-    const semestresRestantes = totalSemestres - semestresCompletados;
+    // 2. Calcular por porcentaje
+    const porcentajePorSemestre = 100 / totalSemestres;
+    const semestresCompletadosPorPorcentaje = Math.floor(porcentajeCompleto / porcentajePorSemestre);
+    
+    // 3. Tomar el MAYOR de los dos (el que más avance tenga)
+    const semestresCompletados = Math.max(semestresCompletadosReales, semestresCompletadosPorPorcentaje);
+    
+    // Semestres restantes = total - semestres completados
+    const semestresRestantes = Math.max(0, totalSemestres - semestresCompletados);
+    
+    // Años restantes = semestres restantes / 2
     const añosRestantes = semestresRestantes / 2;
-    const añosRestantesTexto = añosRestantes % 1 === 0 
-        ? `${añosRestantes}` 
-        : `${Math.floor(añosRestantes)}½`;
+    
+    // Formatear años restantes - SOLO años enteros y medio (½)
+    let añosRestantesTexto;
+    if (añosRestantes === 0) {
+        añosRestantesTexto = '0';
+    } else if (añosRestantes % 1 === 0) {
+        // Número entero exacto
+        añosRestantesTexto = `${añosRestantes}`;
+    } else {
+        // Es X.5, mostrar con ½
+        añosRestantesTexto = `${Math.floor(añosRestantes)}½`;
+    }
+    
+    // Formatear semestres restantes
+    const semestresRestantesTexto = semestresRestantes;
             
     return `
     <div class="stat-item">
@@ -48,12 +73,8 @@ function generateStats(carrera) {
         <div class="stat-label">Años Faltantes</div>
     </div>
     <div class="stat-item">
-        <div class="stat-number">${semestresRestantes}</div>
+        <div class="stat-number">${semestresRestantesTexto}</div>
         <div class="stat-label">Semestres Restantes</div>
-    </div>
-    <div class="stat-item">
-        <div class="stat-number">${semestresCompletados}</div>
-        <div class="stat-label">Semestres Completados</div>
     </div>
     <div class="stat-item">
         <div class="stat-number">${ramosAprobadosCount}/${totalRamos}</div>
@@ -354,28 +375,12 @@ function resetProgress() {
 
 // Ramos a convalidar
 function aplicarConvalidacion() {
-    const ramosConvalidadosLista = [
-        'Paradigmas de Programación',
-        'Estructura de Computadores',
-        'Inglés III',
-        'Fundamentos de Ingeniería de Software',
-        'Análisis de Algoritmos y Estructura de Datos',
-        'Base de Datos',
-        'Organización de Computadores',
-        'Inglés IV',
-        'Redes de Computadores',
-        'Sistemas Operativos',
-        'Ingeniería de Sistemas',
-        'Evaluación de Proyectos',
-        'Tópicos de Especialidad IV',
-        'Proyecto de Ingeniería de Software',
-        'Trabajo de Titulación'
-    ];
+    const ramosLista = ramosConvalidar[carreraActual] || [];
     
     ramosAprobados.clear();
     ramosConvalidados.clear();
     
-    ramosConvalidadosLista.forEach(ramo => {
+    ramosLista.forEach(ramo => {
         ramosConvalidados.add(ramo);
     });
     
@@ -392,6 +397,7 @@ function initializeProgress() {
 }
 
 // Event listeners para navegación
+// Event listeners para navegación
 botones.forEach(btn => {
     btn.addEventListener('click', () => {
         botones.forEach(b => b.classList.remove('active'));
@@ -400,24 +406,33 @@ botones.forEach(btn => {
         ramosAprobados.clear();
         ramosConvalidados.clear();
         
+        const carrera = btn.dataset.carrera;
         const convalidacionContainer = document.getElementById('convalidacionContainer');
         const convalidacionToggle = document.getElementById('convalidacionToggle');
-        const advertenciaRequisitos = document.getElementById('advertenciaRequisitos');
+        const advertencia = document.getElementById('advertencia');
         const slider = convalidacionToggle.querySelector('.toggle-slider-content');
         
-        if (btn.dataset.carrera === 'prosecucion') {
-            convalidacionContainer.style.display = 'flex';
-            advertenciaRequisitos.style.display = 'flex';
-            convalidacionToggle.classList.remove('active');
-            slider.innerHTML = '<span class="toggle-icon">📋</span><span>NORMAL</span>';
+        // Configurar advertencia según la carrera
+        const configAdvertencia = advertencias[carrera];
+        
+        if (configAdvertencia) {
+            // Mostrar advertencia con el texto configurado
+            advertencia.querySelector('.content').innerHTML = configAdvertencia.texto;
+            advertencia.style.display = 'flex';
+            
+            // Mostrar toggle solo si está configurado
+            convalidacionContainer.style.display = configAdvertencia.mostrarToggle ? 'flex' : 'none';
         } else {
+            // No hay advertencia configurada para esta carrera
+            advertencia.style.display = 'none';
             convalidacionContainer.style.display = 'none';
-            advertenciaRequisitos.style.display = 'none';
-            convalidacionToggle.classList.remove('active');
-            slider.innerHTML = '<span class="toggle-icon">📋</span><span>NORMAL</span>';
         }
         
-        renderMalla(btn.dataset.carrera);
+        // Resetear toggle
+        convalidacionToggle.classList.remove('active');
+        slider.innerHTML = '<span class="toggle-icon">📋</span><span>NORMAL</span>';
+        
+        renderMalla(carrera);
     });
 });
 
