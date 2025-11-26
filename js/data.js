@@ -279,11 +279,83 @@ const mallas = {
                 { nombre: 'Tópicos de Especialidad IV', codigo: '13136', prerrequisitos: [] }
             ]
         }
+    ],
+
+    magister: [
+        {
+            semestre: 'Primer Semestre', 
+            ramos: [
+                { nombre: 'Inteligencia Computacional', codigo: '', prerrequisitos: [] },
+                { nombre: 'Optimización en Ingeniería', codigo: '', prerrequisitos: [] },
+                { nombre: 'Electivo I', codigo: '', prerrequisitos: [] }
+            ]
+        },
+        { 
+            semestre: 'Segundo Semestre', 
+            ramos: [
+                { nombre: 'Computación de Alto Rendimiento', codigo: '', prerrequisitos: [] },
+                { nombre: 'Metodologías de Investigación Aplicadas', codigo: '', prerrequisitos: [] },
+                { nombre: 'Electivo II', codigo: '', prerrequisitos: [] }
+            ]
+        },
+        { 
+            semestre: 'Tercer Semestre', 
+            ramos: [
+                { nombre: 'Gestión I+D', codigo: '', prerrequisitos: [] },
+                { nombre: 'Tesis I', codigo: '', prerrequisitos: [] }
+            ]
+        },
+        { 
+            semestre: 'Cuarto Semestre', 
+            ramos: [
+                { nombre: 'Tesis II', codigo: '', prerrequisitos: ['Tesis I'] }
+            ]
+        }
+    ]
+};
+
+// Configuración de ramos a convalidar por carrera
+const ramosConvalidar = {
+    prosecucion: [
+        'Paradigmas de Programación',
+        'Estructura de Computadores',
+        'Inglés III',
+        'Fundamentos de Ingeniería de Software',
+        'Análisis de Algoritmos y Estructura de Datos',
+        'Base de Datos',
+        'Organización de Computadores',
+        'Inglés IV',
+        'Redes de Computadores',
+        'Sistemas Operativos',
+        'Ingeniería de Sistemas',
+        'Evaluación de Proyectos',
+        'Tópicos de Especialidad IV',
+        'Proyecto de Ingeniería de Software',
+        'Trabajo de Titulación'
     ]
 };
 
 const carreraTitles = {
     ejecucion: 'Ingeniería de Ejecución en Computación e Informática (1353)',
     civil: 'Ingeniería Civil en Informática (1463)',
-    prosecucion: 'Prosecución en Ingeniería Civil en Informática'
+    prosecucion: 'Prosecución en Ingeniería Civil en Informática (1873)',
+    magister: 'Magíster en Ingeniería en Informática'
 };
+
+// Configuración de advertencias por carrera
+const advertencias = {
+    prosecucion: {
+        texto: '<strong>Requisitos para convalidación:</strong> Título de Ingeniero de Ejecución en Computación e Informática (USACH) o asignaturas cursadas en el DIINF USACH.<br><i>Egresados de otra ingeniería o carreras afines no cursadas en el DIINF tendrán otros ramos a convalidar. Más información en <a href="https://usach.cl/prosecuciones-facultad-ingenieria-7?_gl=1*ngjp5b*_ga*MTA3MTA4MTY0Ni4xNzU1NDkxNTky*_ga_YWWB4RW5H0*czE3NjA4NTM5OTgkbzIkZzAkdDE3NjA4NTM5OTgkajYwJGwwJGgw&_ga=2.198999462.823723766.1760853999-1071081646.1755491592" class="info-link">USACH</a>.</i>',
+        mostrarToggle: true
+    },
+    magister: {
+        texto: '<strong>Requisitos de Admisión:</strong> Título profesional de Ingeniero o Licenciado en áreas relacionadas con la informática o la ingeniería, emitido por una universidad reconocida.<br><i>Se recomienda revisar los requisitos específicos en la página oficial del programa.</i>',
+        mostrarToggle: false
+    }
+    // Puedes agregar más advertencias para otras carreras
+    // ejecucion: {
+    //     texto: 'Tu advertencia aquí',
+    //     mostrarToggle: false <-- Para convalidaciones.
+    // }
+};
+
